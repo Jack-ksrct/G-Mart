@@ -1,3 +1,4 @@
+/* BODY */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -11,21 +12,21 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 10px 40px;
-    height: 80px; 
+    height: 80px;
 }
 
 /* LOGO */
 .logo img {
-    height: 70px;          
-    width: 160px;          
-    object-fit: cover;     
-    object-position: left; 
+    height: 60px;
+    width: 150px;
+    object-fit: cover;
+    object-position: left;
 }
 
 /* SEARCH BOX */
 .search-box {
     display: flex;
-    width: 45%;
+    width: 40%;
 }
 
 .search-box input {
@@ -50,7 +51,7 @@ body {
     background: darkorange;
 }
 
-/* NAV LINKS */
+/* NAVIGATION */
 .nav-links a {
     color: white;
     margin-left: 20px;
@@ -88,7 +89,7 @@ body {
     color: white;
 }
 
-/* PRODUCT SECTION */
+/* PRODUCTS */
 .products {
     padding: 50px;
     text-align: center;
@@ -101,7 +102,7 @@ body {
     gap: 25px;
 }
 
-/* EQUAL CARD SIZE */
+/* PRODUCT CARD */
 .card {
     width: 230px;
     height: 360px;
@@ -113,8 +114,17 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
+
+    transition: 0.3s;
 }
 
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image Fix */
 .card img {
     width: 100%;
     height: 150px;
@@ -122,6 +132,7 @@ body {
     border-radius: 10px;
 }
 
+/* Button */
 .card button {
     background: orange;
     border: none;
@@ -136,6 +147,40 @@ body {
     background: black;
 }
 
+/* CONTACT FORM */
+.contact {
+    padding: 50px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+form input,
+form textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    background: orange;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: black;
+}
+
 /* FOOTER */
 footer {
     background: #222;
@@ -147,6 +192,7 @@ footer {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+
     .header {
         flex-direction: column;
         height: auto;
@@ -156,4 +202,8 @@ footer {
     .search-box {
         width: 90%;
     }
-}
+
+    .nav-links {
+        display: flex;
+        gap: 15px;
+    }

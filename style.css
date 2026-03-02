@@ -9,7 +9,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .header {
     background: #222;
     display: flex;
@@ -66,6 +65,10 @@ body {
 
 .nav-links a:hover {
     color: orange;
+}
+
+a {
+    text-decoration: none;
 }
 
 main {
@@ -152,7 +155,6 @@ main {
     background: orange;
     color: white;
     padding: 10px;
-    text-decoration: none;
     border-radius: 6px;
     font-weight: bold;
     display: inline-block;
@@ -165,15 +167,6 @@ main {
 .contact {
     padding: 50px;
     text-align: center;
-}
-.call-link {
-    color: orange;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.call-link:hover {
-    text-decoration: underline;
 }
 
 form {
@@ -202,6 +195,15 @@ form button {
 
 form button:hover {
     background: black;
+}
+
+.call-link {
+    color: black;
+    font-weight: bold;
+}
+
+.call-link:hover {
+    color: orange;
 }
 
 footer {

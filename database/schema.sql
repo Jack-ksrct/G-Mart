@@ -1,0 +1,85 @@
+CREATE TABLE IF NOT EXISTS categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    accent_color VARCHAR(32) NOT NULL,
+    hero_image VARCHAR(255) NOT NULL,
+    featured TINYINT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    description TEXT NOT NULL,
+    price INT NOT NULL,
+    original_price INT,
+    rating DECIMAL(3,2) NOT NULL DEFAULT 4.5,
+    inventory INT NOT NULL DEFAULT 0,
+    stock_status VARCHAR(64) NOT NULL DEFAULT 'In stock',
+    delivery VARCHAR(255) NOT NULL DEFAULT 'Ships in 24 hours',
+    tag VARCHAR(255),
+    badge VARCHAR(255),
+    image_path VARCHAR(255) NOT NULL,
+    featured TINYINT NOT NULL DEFAULT 0,
+    CONSTRAINT fk_products_category
+        FOREIGN KEY (category_id) REFERENCES categories (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    phone VARCHAR(32),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(32) NOT NULL,
+    city VARCHAR(255),
+    budget VARCHAR(255),
+    message TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS app_meta (
+    meta_key VARCHAR(255) PRIMARY KEY,
+    value TEXT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_number VARCHAR(255) NOT NULL UNIQUE,
+    customer_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(32) NOT NULL,
+    address_line TEXT NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    state VARCHAR(255) NOT NULL,
+    postal_code VARCHAR(32) NOT NULL,
+    notes TEXT,
+    items_count INT NOT NULL DEFAULT 0,
+    subtotal INT NOT NULL DEFAULT 0,
+    status VARCHAR(64) NOT NULL DEFAULT 'Placed',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_slug VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    category_name VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    unit_price INT NOT NULL,
+    quantity INT NOT NULL,
+    line_total INT NOT NULL,
+    CONSTRAINT fk_order_items_order
+        FOREIGN KEY (order_id) REFERENCES orders (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
